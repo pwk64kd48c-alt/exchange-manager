@@ -368,7 +368,6 @@ dialog::backdrop{
 
 </header>
 
-
 <main>
 
   <div class="toolbar">
@@ -402,40 +401,19 @@ dialog::backdrop{
       id="editId"
     >
 
-
     <div class="field">
 
       <label>交換内容 *</label>
 
       <select id="itemType">
 
-        <option value="ぱしゃっつ">
-          ぱしゃっつ
-        </option>
-
-        <option value="缶バッジ">
-          缶バッジ
-        </option>
-
-        <option value="アクリルスタンド">
-          アクリルスタンド
-        </option>
-
-        <option value="チェキ">
-          チェキ
-        </option>
-
-        <option value="カード">
-          カード
-        </option>
-
-        <option value="ぬいぐるみ">
-          ぬいぐるみ
-        </option>
-
-        <option value="その他">
-          その他
-        </option>
+        <option value="ぱしゃっつ">ぱしゃっつ</option>
+        <option value="缶バッジ">缶バッジ</option>
+        <option value="アクリルスタンド">アクリルスタンド</option>
+        <option value="チェキ">チェキ</option>
+        <option value="カード">カード</option>
+        <option value="ぬいぐるみ">ぬいぐるみ</option>
+        <option value="その他">その他</option>
 
       </select>
 
@@ -469,8 +447,8 @@ dialog::backdrop{
       >
 
       <div class="photo-note">
-        この交換に関する画像を1枚入れられます。<br>
-        画像は自動で小さくして保存します。
+        この「交換内容」の画像を1枚登録できます。<br>
+        ぱしゃっつなら、ぱしゃっつの交換すべてに同じ画像が表示されます。
       </div>
 
       <img
@@ -484,7 +462,7 @@ dialog::backdrop{
           type="button"
           id="removeImageButton"
         >
-          画像を削除
+          この交換内容の画像を削除
         </button>
 
       </div>
@@ -535,17 +513,9 @@ dialog::backdrop{
 
       <select id="method">
 
-        <option value="郵送">
-          郵送
-        </option>
-
-        <option value="手渡し">
-          手渡し
-        </option>
-
-        <option value="その他">
-          その他
-        </option>
+        <option value="郵送">郵送</option>
+        <option value="手渡し">手渡し</option>
+        <option value="その他">その他</option>
 
       </select>
 
@@ -558,25 +528,11 @@ dialog::backdrop{
 
       <select id="status">
 
-        <option value="約束済み">
-          約束済み
-        </option>
-
-        <option value="発送待ち">
-          発送待ち
-        </option>
-
-        <option value="発送済み">
-          発送済み
-        </option>
-
-        <option value="到着待ち">
-          到着待ち
-        </option>
-
-        <option value="完了">
-          完了
-        </option>
+        <option value="約束済み">約束済み</option>
+        <option value="発送待ち">発送待ち</option>
+        <option value="発送済み">発送済み</option>
+        <option value="到着待ち">到着待ち</option>
+        <option value="完了">完了</option>
 
       </select>
 
@@ -660,12 +616,13 @@ dialog::backdrop{
 <script>
 
 const STORAGE_KEY = "exchangeData";
+const IMAGE_STORAGE_KEY = "categoryImages";
 
 let data = [];
-
+let categoryImages = {};
 let currentFilter = "all";
-
 let currentImage = "";
+let currentImageType = "";
 
 
 /* =========================
@@ -754,8 +711,111 @@ try{
 }
 
 
+try{
+
+  categoryImages = JSON.parse(
+    localStorage.getItem(IMAGE_STORAGE_KEY) || "{}"
+  );
+
+  if(
+    !categoryImages ||
+    typeof categoryImages !== "object"
+  ){
+    categoryImages = {};
+  }
+
+}catch(error){
+
+  categoryImages = {};
+
+}
+
+
 /* =========================
-   保存
+   古い画像を新仕様へ移行
+========================= */
+
+let imageMigrationNeeded = false;
+
+data.forEach(function(item){
+
+  if(
+    item.image &&
+    item.itemType &&
+    !categoryImages[item.itemType]
+  ){
+
+    categoryImages[item.itemType] =
+      item.image;
+
+    imageMigrationNeeded = true;
+
+  }
+
+});
+
+
+if(imageMigrationNeeded){
+
+  try{
+
+    localStorage.setItem(
+      IMAGE_STORAGE_KEY,
+      JSON.stringify(categoryImages)
+    );
+
+  }catch(error){}
+
+}
+
+
+/* =========================
+   画像カテゴリ名
+========================= */
+
+function getItemType(){
+
+  if(itemType.value === "その他"){
+
+    return otherItem.value.trim();
+
+  }
+
+  return itemType.value;
+
+}
+
+
+/* =========================
+   画像保存
+========================= */
+
+function saveCategoryImages(){
+
+  try{
+
+    localStorage.setItem(
+      IMAGE_STORAGE_KEY,
+      JSON.stringify(categoryImages)
+    );
+
+    return true;
+
+  }catch(error){
+
+    alert(
+      "画像を保存できませんでした。\n画像の容量が大きすぎる可能性があります。"
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================
+   データ保存
 ========================= */
 
 function saveData(){
@@ -788,7 +848,7 @@ function saveData(){
 
 function compressImage(file){
 
-  return new Promise((resolve,reject)=>{
+  return new Promise(function(resolve,reject){
 
     const reader =
       new FileReader();
@@ -803,7 +863,6 @@ function compressImage(file){
         const maxSize = 900;
 
         let width = img.width;
-
         let height = img.height;
 
 
@@ -839,7 +898,6 @@ function compressImage(file){
           document.createElement("canvas");
 
         canvas.width = width;
-
         canvas.height = height;
 
 
@@ -912,10 +970,33 @@ imageInput.addEventListener(
     }
 
 
+    const selectedType =
+      getItemType();
+
+
+    if(!selectedType){
+
+      alert(
+        "先に交換内容を選んでね！"
+      );
+
+      imageInput.value = "";
+
+      return;
+
+    }
+
+
     try{
 
-      currentImage =
+      const compressed =
         await compressImage(file);
+
+      currentImage =
+        compressed;
+
+      currentImageType =
+        selectedType;
 
       imagePreview.src =
         currentImage;
@@ -936,6 +1017,88 @@ imageInput.addEventListener(
 
 
 /* =========================
+   交換内容変更
+========================= */
+
+itemType.addEventListener(
+  "change",
+  function(){
+
+    updateOtherField();
+
+    const selectedType =
+      getItemType();
+
+    currentImageType =
+      selectedType;
+
+    currentImage =
+      categoryImages[selectedType] || "";
+
+    if(currentImage){
+
+      imagePreview.src =
+        currentImage;
+
+      imagePreview.style.display =
+        "block";
+
+    }else{
+
+      imagePreview.src = "";
+
+      imagePreview.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   その他変更
+========================= */
+
+otherItem.addEventListener(
+  "input",
+  function(){
+
+    if(itemType.value !== "その他"){
+      return;
+    }
+
+    const selectedType =
+      otherItem.value.trim();
+
+    currentImageType =
+      selectedType;
+
+    currentImage =
+      categoryImages[selectedType] || "";
+
+    if(currentImage){
+
+      imagePreview.src =
+        currentImage;
+
+      imagePreview.style.display =
+        "block";
+
+    }else{
+
+      imagePreview.src = "";
+
+      imagePreview.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* =========================
    画像削除
 ========================= */
 
@@ -945,7 +1108,23 @@ document
     "click",
     function(){
 
+      const selectedType =
+        currentImageType ||
+        getItemType();
+
+
+      if(selectedType){
+
+        delete categoryImages[selectedType];
+
+        saveCategoryImages();
+
+      }
+
+
       currentImage = "";
+
+      currentImageType = "";
 
       imageInput.value = "";
 
@@ -953,6 +1132,8 @@ document
 
       imagePreview.style.display =
         "none";
+
+      show();
 
     }
   );
@@ -984,11 +1165,6 @@ function updateOtherField(){
 
 }
 
-itemType.addEventListener(
-  "change",
-  updateOtherField
-);
-
 
 /* =========================
    フォームを開く
@@ -1015,8 +1191,7 @@ function openForm(item = null){
 
 
   charactersInput.value =
-    item?.characters ||
-    "";
+    item?.characters || "";
 
 
   const standardItems = [
@@ -1083,8 +1258,13 @@ function openForm(item = null){
     "";
 
 
+  currentImageType =
+    item?.itemType ||
+    itemType.value;
+
+
   currentImage =
-    item?.image ||
+    categoryImages[currentImageType] ||
     "";
 
 
@@ -1158,9 +1338,7 @@ exchangeForm.addEventListener(
 
 
     const selectedType =
-      itemType.value === "その他"
-        ? otherItem.value.trim()
-        : itemType.value;
+      getItemType();
 
 
     if(!selectedType){
@@ -1208,6 +1386,28 @@ exchangeForm.addEventListener(
     }
 
 
+    /*
+      新しい画像が選ばれていたら
+      この交換内容の画像として保存
+    */
+
+    if(
+      currentImage &&
+      currentImageType === selectedType
+    ){
+
+      categoryImages[selectedType] =
+        currentImage;
+
+      if(!saveCategoryImages()){
+
+        return;
+
+      }
+
+    }
+
+
     const newItem = {
 
       id:
@@ -1225,9 +1425,6 @@ exchangeForm.addEventListener(
 
       xid:
         xidInput.value.trim(),
-
-      image:
-        currentImage,
 
       method:
         methodInput.value,
@@ -1251,7 +1448,8 @@ exchangeForm.addEventListener(
       data.findIndex(
         function(item){
 
-          return item.id === newItem.id;
+          return item.id ===
+            newItem.id;
 
         }
       );
@@ -1278,6 +1476,8 @@ exchangeForm.addEventListener(
       exchangeForm.reset();
 
       currentImage = "";
+
+      currentImageType = "";
 
       imagePreview.src = "";
 
@@ -1574,13 +1774,18 @@ function show(){
       .map(
         function(item){
 
+          const categoryImage =
+            categoryImages[item.itemType] ||
+            "";
+
+
           const imageHtml =
-            item.image
+            categoryImage
               ? `
                 <img
                   class="card-image"
-                  src="${item.image}"
-                  data-photo="${item.id}"
+                  src="${categoryImage}"
+                  data-photo="${encodeURIComponent(categoryImage)}"
                 >
               `
               : "";
@@ -1715,14 +1920,14 @@ function show(){
 
                 <button
                   type="button"
-                  data-edit="${item.id}"
+                  data-edit="${escapeHtml(item.id)}"
                 >
                   編集
                 </button>
 
                 <button
                   type="button"
-                  data-delete="${item.id}"
+                  data-delete="${escapeHtml(item.id)}"
                 >
                   削除
                 </button>
@@ -1793,27 +1998,11 @@ function show(){
           "click",
           function(){
 
-            const item =
-              data.find(
-                function(x){
-
-                  return x.id ===
-                    image.dataset.photo;
-
-                }
-              );
-
-
-            if(
-              item &&
-              item.image
-            ){
-
-              openPhoto(
-                item.image
-              );
-
-            }
+            openPhoto(
+              decodeURIComponent(
+                image.dataset.photo
+              )
+            );
 
           }
         );
