@@ -27,7 +27,7 @@ header{
 }
 
 main{
-  max-width:700px;
+  max-width:760px;
   margin:auto;
   padding:16px;
 }
@@ -96,88 +96,171 @@ button{
   white-space:nowrap;
 }
 
-.card{
+/* =========================
+   グループ
+========================= */
+
+.group{
+  margin-bottom:24px;
+}
+
+.group-header{
   background:#fff;
-  border:1px solid #e8e8e8;
-  border-radius:16px;
+  border:1px solid #e3e3e3;
+  border-radius:18px 18px 0 0;
   padding:15px;
-  margin-bottom:12px;
   box-shadow:0 2px 8px rgba(0,0,0,.03);
 }
 
-.card-image{
-  width:60px;
-  height:60px;
+.group-title-row{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.group-image{
+  width:78px;
+  height:78px;
   object-fit:cover;
-  background:#f5f5f5;
-  border-radius:10px;
-  display:block;
-  margin:14px 0 4px 0;
+  border-radius:13px;
+  background:#f1f1f1;
+  flex-shrink:0;
   cursor:pointer;
+}
+
+.group-info{
+  min-width:0;
+  flex:1;
+}
+
+.group-name{
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.45;
+  word-break:break-word;
+}
+
+.group-date{
+  margin-top:5px;
+  font-size:12px;
+  color:#888;
+}
+
+.group-count{
+  margin-top:5px;
+  font-size:12px;
+  color:#999;
+}
+
+.group-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:12px;
+}
+
+.stat{
+  border-radius:20px;
+  padding:5px 9px;
+  background:#f1f1f1;
+  color:#666;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.group-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.group-actions button{
+  flex:1;
+  border:1px solid #ddd;
+  background:#fff;
+  color:#666;
+  border-radius:8px;
+  padding:7px;
+  font-size:12px;
+}
+
+/* =========================
+   交換カード
+========================= */
+
+.exchange-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  padding-top:10px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e8e8e8;
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.03);
+  min-width:0;
 }
 
 .top{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:10px;
+  gap:7px;
 }
 
 .name{
-  font-size:17px;
+  font-size:14px;
   font-weight:bold;
+  line-height:1.4;
+  word-break:break-word;
 }
 
 .xid{
-  margin-top:5px;
-  font-size:14px;
+  margin-top:4px;
+  font-size:11px;
   font-weight:bold;
+  word-break:break-all;
 }
 
 .xid a{
-  color:#666;
+  color:#777;
   text-decoration:none;
 }
 
 .badge{
-  font-size:11px;
+  font-size:9px;
   background:#eee;
   color:#666;
   border-radius:20px;
-  padding:5px 9px;
+  padding:4px 7px;
   white-space:nowrap;
-}
-
-.item-type{
-  display:inline-block;
-  margin-top:15px;
-  padding:5px 10px;
-  border-radius:20px;
-  background:#f0f0f0;
-  color:#666;
-  font-size:12px;
-  font-weight:bold;
+  flex-shrink:0;
 }
 
 .characters{
-  margin-top:9px;
-  font-size:18px;
+  margin-top:12px;
+  font-size:15px;
   font-weight:bold;
+  line-height:1.5;
   color:#444;
   word-break:break-word;
 }
 
 .meta{
-  font-size:12px;
+  font-size:10px;
   color:#888;
-  margin-top:14px;
-  line-height:1.8;
+  margin-top:10px;
+  line-height:1.7;
+  word-break:break-word;
 }
 
 .actions{
   display:flex;
-  gap:7px;
-  margin-top:14px;
+  gap:5px;
+  margin-top:10px;
 }
 
 .actions button{
@@ -185,15 +268,24 @@ button{
   border:1px solid #ddd;
   background:#fff;
   color:#666;
-  border-radius:8px;
-  padding:8px;
+  border-radius:7px;
+  padding:6px 3px;
+  font-size:11px;
 }
+
+/* =========================
+   空表示
+========================= */
 
 .empty{
   text-align:center;
   color:#999;
   padding:50px 10px;
 }
+
+/* =========================
+   ダイアログ
+========================= */
 
 dialog{
   border:0;
@@ -287,6 +379,21 @@ dialog::backdrop{
   margin-top:7px;
 }
 
+/* =========================
+   グループ編集
+========================= */
+
+.group-form-note{
+  font-size:11px;
+  color:#999;
+  line-height:1.5;
+  margin-top:5px;
+}
+
+/* =========================
+   画像拡大
+========================= */
+
 .lightbox{
   width:calc(100% - 24px);
   max-width:900px;
@@ -318,6 +425,10 @@ dialog::backdrop{
   font-size:20px;
 }
 
+/* =========================
+   スマホ
+========================= */
+
 @media(max-width:500px){
 
   .toolbar{
@@ -333,8 +444,30 @@ dialog::backdrop{
     width:100%;
   }
 
+  .group-image{
+    width:70px;
+    height:70px;
+  }
+
+  .group-name{
+    font-size:15px;
+  }
+
+  .exchange-grid{
+    gap:8px;
+  }
+
+  .card{
+    padding:10px;
+  }
+
   .characters{
-    font-size:17px;
+    font-size:14px;
+  }
+
+  .badge{
+    font-size:8px;
+    padding:3px 5px;
   }
 }
 </style>
@@ -388,7 +521,9 @@ dialog::backdrop{
 </main>
 
 
-<!-- 追加・編集 -->
+<!-- =========================
+     交換追加・編集
+========================= -->
 
 <dialog id="formDialog">
 
@@ -405,33 +540,15 @@ dialog::backdrop{
 
       <label>交換内容 *</label>
 
-      <select id="itemType">
-
-        <option value="ぱしゃっつ">ぱしゃっつ</option>
-        <option value="缶バッジ">缶バッジ</option>
-        <option value="アクリルスタンド">アクリルスタンド</option>
-        <option value="チェキ">チェキ</option>
-        <option value="カード">カード</option>
-        <option value="ぬいぐるみ">ぬいぐるみ</option>
-        <option value="その他">その他</option>
-
-      </select>
-
-    </div>
-
-
-    <div
-      class="field"
-      id="otherField"
-      style="display:none;"
-    >
-
-      <label>交換内容を入力 *</label>
-
       <input
-        id="otherItem"
-        placeholder="例：クリアファイル"
+        id="itemType"
+        required
+        placeholder="例：あんさんぶるスターズ！！ ぱしゃっつ Vol.6"
       >
+
+      <div class="group-form-note">
+        同じ名前を入力すると、自動で同じファイルにまとまります。
+      </div>
 
     </div>
 
@@ -448,7 +565,7 @@ dialog::backdrop{
 
       <div class="photo-note">
         この「交換内容」の画像を1枚登録できます。<br>
-        ぱしゃっつなら、ぱしゃっつの交換すべてに同じ画像が表示されます。
+        同じ交換内容の交換すべてに同じ画像が表示されます。
       </div>
 
       <img
@@ -528,11 +645,11 @@ dialog::backdrop{
 
       <select id="status">
 
-        <option value="約束済み">約束済み</option>
-        <option value="発送待ち">発送待ち</option>
-        <option value="発送済み">発送済み</option>
-        <option value="到着待ち">到着待ち</option>
-        <option value="完了">完了</option>
+        <option value="約束済み">📝 約束済み</option>
+        <option value="梱包済み">📦 梱包済み</option>
+        <option value="発送済み">📮 発送済み</option>
+        <option value="到着待ち">📬 到着待ち</option>
+        <option value="完了">✅ 完了</option>
 
       </select>
 
@@ -593,7 +710,97 @@ dialog::backdrop{
 </dialog>
 
 
-<!-- 画像拡大 -->
+<!-- =========================
+     ファイル編集
+========================= -->
+
+<dialog id="groupDialog">
+
+  <h2>グッズ情報を編集</h2>
+
+  <form id="groupForm">
+
+    <input
+      type="hidden"
+      id="groupOldName"
+    >
+
+    <div class="field">
+
+      <label>グッズ名 *</label>
+
+      <input
+        id="groupName"
+        required
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>発売日</label>
+
+      <input
+        id="groupDate"
+        type="date"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>代表画像</label>
+
+      <input
+        id="groupImage"
+        type="file"
+        accept="image/*"
+      >
+
+      <img
+        id="groupImagePreview"
+        class="image-preview"
+      >
+
+      <div class="image-buttons">
+
+        <button
+          type="button"
+          id="removeGroupImageButton"
+        >
+          代表画像を削除
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="save"
+    >
+      保存
+    </button>
+
+    <button
+      type="button"
+      class="cancel"
+      id="cancelGroupButton"
+    >
+      キャンセル
+    </button>
+
+  </form>
+
+</dialog>
+
+
+<!-- =========================
+     画像拡大
+========================= -->
 
 <dialog
   id="photoDialog"
@@ -617,12 +824,18 @@ dialog::backdrop{
 
 const STORAGE_KEY = "exchangeData";
 const IMAGE_STORAGE_KEY = "categoryImages";
+const GROUP_STORAGE_KEY = "exchangeGroups";
 
 let data = [];
 let categoryImages = {};
+let groups = {};
 let currentFilter = "all";
+
 let currentImage = "";
 let currentImageType = "";
+
+let currentGroupImage = "";
+let currentEditingGroup = "";
 
 
 /* =========================
@@ -632,11 +845,17 @@ let currentImageType = "";
 const formDialog =
   document.getElementById("formDialog");
 
+const groupDialog =
+  document.getElementById("groupDialog");
+
 const photoDialog =
   document.getElementById("photoDialog");
 
 const exchangeForm =
   document.getElementById("exchangeForm");
+
+const groupForm =
+  document.getElementById("groupForm");
 
 const formTitle =
   document.getElementById("formTitle");
@@ -646,12 +865,6 @@ const editId =
 
 const itemType =
   document.getElementById("itemType");
-
-const otherField =
-  document.getElementById("otherField");
-
-const otherItem =
-  document.getElementById("otherItem");
 
 const imageInput =
   document.getElementById("image");
@@ -689,6 +902,21 @@ const searchInput =
 const listElement =
   document.getElementById("list");
 
+const groupOldName =
+  document.getElementById("groupOldName");
+
+const groupName =
+  document.getElementById("groupName");
+
+const groupDate =
+  document.getElementById("groupDate");
+
+const groupImage =
+  document.getElementById("groupImage");
+
+const groupImagePreview =
+  document.getElementById("groupImagePreview");
+
 
 /* =========================
    データ読み込み
@@ -721,7 +949,9 @@ try{
     !categoryImages ||
     typeof categoryImages !== "object"
   ){
+
     categoryImages = {};
+
   }
 
 }catch(error){
@@ -731,11 +961,31 @@ try{
 }
 
 
-/* =========================
-   古い画像を新仕様へ移行
-========================= */
+try{
 
-let imageMigrationNeeded = false;
+  groups = JSON.parse(
+    localStorage.getItem(GROUP_STORAGE_KEY) || "{}"
+  );
+
+  if(
+    !groups ||
+    typeof groups !== "object"
+  ){
+
+    groups = {};
+
+  }
+
+}catch(error){
+
+  groups = {};
+
+}
+
+
+/* =========================
+   古い画像データ移行
+========================= */
 
 data.forEach(function(item){
 
@@ -748,49 +998,50 @@ data.forEach(function(item){
     categoryImages[item.itemType] =
       item.image;
 
-    imageMigrationNeeded = true;
-
   }
 
 });
 
 
-if(imageMigrationNeeded){
+try{
+
+  localStorage.setItem(
+    IMAGE_STORAGE_KEY,
+    JSON.stringify(categoryImages)
+  );
+
+}catch(error){}
+
+
+/* =========================
+   保存
+========================= */
+
+function saveData(){
 
   try{
 
     localStorage.setItem(
-      IMAGE_STORAGE_KEY,
-      JSON.stringify(categoryImages)
+      STORAGE_KEY,
+      JSON.stringify(data)
     );
 
-  }catch(error){}
+    return true;
 
-}
+  }catch(error){
 
+    alert(
+      "保存できませんでした。\n画像の容量が大きすぎる可能性があります。"
+    );
 
-/* =========================
-   画像カテゴリ名
-========================= */
-
-function getItemType(){
-
-  if(itemType.value === "その他"){
-
-    return otherItem.value.trim();
+    return false;
 
   }
 
-  return itemType.value;
-
 }
 
 
-/* =========================
-   画像保存
-========================= */
-
-function saveCategoryImages(){
+function saveImages(){
 
   try{
 
@@ -814,17 +1065,13 @@ function saveCategoryImages(){
 }
 
 
-/* =========================
-   データ保存
-========================= */
-
-function saveData(){
+function saveGroups(){
 
   try{
 
     localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(data)
+      GROUP_STORAGE_KEY,
+      JSON.stringify(groups)
     );
 
     return true;
@@ -832,7 +1079,7 @@ function saveData(){
   }catch(error){
 
     alert(
-      "保存できませんでした。\n画像の容量が大きすぎる可能性があります。"
+      "グッズ情報を保存できませんでした。"
     );
 
     return false;
@@ -865,7 +1112,6 @@ function compressImage(file){
         let width = img.width;
         let height = img.height;
 
-
         if(
           width > maxSize ||
           height > maxSize
@@ -893,13 +1139,11 @@ function compressImage(file){
 
         }
 
-
         const canvas =
           document.createElement("canvas");
 
         canvas.width = width;
         canvas.height = height;
-
 
         const ctx =
           canvas.getContext("2d");
@@ -912,7 +1156,6 @@ function compressImage(file){
           height
         );
 
-
         resolve(
           canvas.toDataURL(
             "image/jpeg",
@@ -922,7 +1165,6 @@ function compressImage(file){
 
       };
 
-
       img.onerror = function(){
 
         reject(
@@ -931,12 +1173,10 @@ function compressImage(file){
 
       };
 
-
       img.src =
         event.target.result;
 
     };
-
 
     reader.onerror = function(){
 
@@ -946,10 +1186,80 @@ function compressImage(file){
 
     };
 
-
     reader.readAsDataURL(file);
 
   });
+
+}
+
+
+/* =========================
+   交換追加フォーム
+========================= */
+
+function openForm(item = null){
+
+  formTitle.textContent =
+    item
+      ? "交換を編集"
+      : "交換を追加";
+
+  editId.value =
+    item?.id || "";
+
+  itemType.value =
+    item?.itemType || "";
+
+  charactersInput.value =
+    item?.characters || "";
+
+  nameInput.value =
+    item?.name || "";
+
+  xidInput.value =
+    item?.xid || "";
+
+  methodInput.value =
+    item?.method || "郵送";
+
+  statusInput.value =
+    item?.status || "約束済み";
+
+  dateInput.value =
+    item?.date || "";
+
+  eventInput.value =
+    item?.event || "";
+
+  memoInput.value =
+    item?.memo || "";
+
+  currentImageType =
+    item?.itemType || "";
+
+  currentImage =
+    categoryImages[currentImageType] || "";
+
+  if(currentImage){
+
+    imagePreview.src =
+      currentImage;
+
+    imagePreview.style.display =
+      "block";
+
+  }else{
+
+    imagePreview.src = "";
+
+    imagePreview.style.display =
+      "none";
+
+  }
+
+  imageInput.value = "";
+
+  formDialog.showModal();
 
 }
 
@@ -969,15 +1279,13 @@ imageInput.addEventListener(
       return;
     }
 
-
     const selectedType =
-      getItemType();
-
+      itemType.value.trim();
 
     if(!selectedType){
 
       alert(
-        "先に交換内容を選んでね！"
+        "先に交換内容を入力してね！"
       );
 
       imageInput.value = "";
@@ -986,14 +1294,10 @@ imageInput.addEventListener(
 
     }
 
-
     try{
 
-      const compressed =
-        await compressImage(file);
-
       currentImage =
-        compressed;
+        await compressImage(file);
 
       currentImageType =
         selectedType;
@@ -1021,55 +1325,11 @@ imageInput.addEventListener(
 ========================= */
 
 itemType.addEventListener(
-  "change",
-  function(){
-
-    updateOtherField();
-
-    const selectedType =
-      getItemType();
-
-    currentImageType =
-      selectedType;
-
-    currentImage =
-      categoryImages[selectedType] || "";
-
-    if(currentImage){
-
-      imagePreview.src =
-        currentImage;
-
-      imagePreview.style.display =
-        "block";
-
-    }else{
-
-      imagePreview.src = "";
-
-      imagePreview.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* =========================
-   その他変更
-========================= */
-
-otherItem.addEventListener(
   "input",
   function(){
 
-    if(itemType.value !== "その他"){
-      return;
-    }
-
     const selectedType =
-      otherItem.value.trim();
+      itemType.value.trim();
 
     currentImageType =
       selectedType;
@@ -1109,18 +1369,15 @@ document
     function(){
 
       const selectedType =
-        currentImageType ||
-        getItemType();
-
+        itemType.value.trim();
 
       if(selectedType){
 
         delete categoryImages[selectedType];
 
-        saveCategoryImages();
+        saveImages();
 
       }
-
 
       currentImage = "";
 
@@ -1137,161 +1394,6 @@ document
 
     }
   );
-
-
-/* =========================
-   その他
-========================= */
-
-function updateOtherField(){
-
-  if(
-    itemType.value === "その他"
-  ){
-
-    otherField.style.display =
-      "block";
-
-    otherItem.required = true;
-
-  }else{
-
-    otherField.style.display =
-      "none";
-
-    otherItem.required = false;
-
-  }
-
-}
-
-
-/* =========================
-   フォームを開く
-========================= */
-
-function openForm(item = null){
-
-  formTitle.textContent =
-    item
-      ? "交換を編集"
-      : "交換を追加";
-
-
-  editId.value =
-    item?.id || "";
-
-
-  nameInput.value =
-    item?.name || "";
-
-
-  xidInput.value =
-    item?.xid || "";
-
-
-  charactersInput.value =
-    item?.characters || "";
-
-
-  const standardItems = [
-    "ぱしゃっつ",
-    "缶バッジ",
-    "アクリルスタンド",
-    "チェキ",
-    "カード",
-    "ぬいぐるみ"
-  ];
-
-
-  if(
-    item &&
-    item.itemType &&
-    !standardItems.includes(
-      item.itemType
-    )
-  ){
-
-    itemType.value =
-      "その他";
-
-    otherItem.value =
-      item.itemType;
-
-  }else{
-
-    itemType.value =
-      item?.itemType ||
-      "ぱしゃっつ";
-
-    otherItem.value =
-      "";
-
-  }
-
-
-  updateOtherField();
-
-
-  methodInput.value =
-    item?.method ||
-    "郵送";
-
-
-  statusInput.value =
-    item?.status ||
-    "約束済み";
-
-
-  dateInput.value =
-    item?.date ||
-    "";
-
-
-  eventInput.value =
-    item?.event ||
-    "";
-
-
-  memoInput.value =
-    item?.memo ||
-    "";
-
-
-  currentImageType =
-    item?.itemType ||
-    itemType.value;
-
-
-  currentImage =
-    categoryImages[currentImageType] ||
-    "";
-
-
-  if(currentImage){
-
-    imagePreview.src =
-      currentImage;
-
-    imagePreview.style.display =
-      "block";
-
-  }else{
-
-    imagePreview.src = "";
-
-    imagePreview.style.display =
-      "none";
-
-  }
-
-
-  imageInput.value = "";
-
-
-  formDialog.showModal();
-
-}
 
 
 /* =========================
@@ -1327,7 +1429,7 @@ document
 
 
 /* =========================
-   保存
+   交換保存
 ========================= */
 
 exchangeForm.addEventListener(
@@ -1336,10 +1438,14 @@ exchangeForm.addEventListener(
 
     event.preventDefault();
 
-
     const selectedType =
-      getItemType();
+      itemType.value.trim();
 
+    const characterText =
+      charactersInput.value.trim();
+
+    const partnerName =
+      nameInput.value.trim();
 
     if(!selectedType){
 
@@ -1347,18 +1453,11 @@ exchangeForm.addEventListener(
         "交換内容を入力してね！"
       );
 
+      itemType.focus();
+
       return;
 
     }
-
-
-    const characterText =
-      charactersInput.value.trim();
-
-
-    const partnerName =
-      nameInput.value.trim();
-
 
     if(!characterText){
 
@@ -1372,7 +1471,6 @@ exchangeForm.addEventListener(
 
     }
 
-
     if(!partnerName){
 
       alert(
@@ -1385,11 +1483,7 @@ exchangeForm.addEventListener(
 
     }
 
-
-    /*
-      新しい画像が選ばれていたら
-      この交換内容の画像として保存
-    */
+    /* 画像保存 */
 
     if(
       currentImage &&
@@ -1399,7 +1493,7 @@ exchangeForm.addEventListener(
       categoryImages[selectedType] =
         currentImage;
 
-      if(!saveCategoryImages()){
+      if(!saveImages()){
 
         return;
 
@@ -1407,6 +1501,7 @@ exchangeForm.addEventListener(
 
     }
 
+    /* 新しい交換 */
 
     const newItem = {
 
@@ -1443,7 +1538,6 @@ exchangeForm.addEventListener(
 
     };
 
-
     const existingIndex =
       data.findIndex(
         function(item){
@@ -1453,7 +1547,6 @@ exchangeForm.addEventListener(
 
         }
       );
-
 
     if(existingIndex >= 0){
 
@@ -1467,7 +1560,6 @@ exchangeForm.addEventListener(
       );
 
     }
-
 
     if(saveData()){
 
@@ -1483,8 +1575,6 @@ exchangeForm.addEventListener(
 
       imagePreview.style.display =
         "none";
-
-      updateOtherField();
 
       show();
 
@@ -1508,7 +1598,6 @@ function editItem(id){
 
       }
     );
-
 
   if(item){
 
@@ -1535,7 +1624,6 @@ function deleteItem(id){
 
   }
 
-
   data =
     data.filter(
       function(item){
@@ -1545,8 +1633,296 @@ function deleteItem(id){
       }
     );
 
+  saveData();
+
+  show();
+
+}
+
+
+/* =========================
+   ファイル情報
+========================= */
+
+function getGroup(name){
+
+  if(!groups[name]){
+
+    groups[name] = {
+
+      date:"",
+      image:""
+
+    };
+
+  }
+
+  return groups[name];
+
+}
+
+
+/* =========================
+   ファイル編集を開く
+========================= */
+
+function openGroupEditor(name){
+
+  const group =
+    getGroup(name);
+
+  currentEditingGroup =
+    name;
+
+  groupOldName.value =
+    name;
+
+  groupName.value =
+    name;
+
+  groupDate.value =
+    group.date || "";
+
+  currentGroupImage =
+    group.image ||
+    categoryImages[name] ||
+    "";
+
+  if(currentGroupImage){
+
+    groupImagePreview.src =
+      currentGroupImage;
+
+    groupImagePreview.style.display =
+      "block";
+
+  }else{
+
+    groupImagePreview.src = "";
+
+    groupImagePreview.style.display =
+      "none";
+
+  }
+
+  groupImage.value = "";
+
+  groupDialog.showModal();
+
+}
+
+
+/* =========================
+   ファイル画像選択
+========================= */
+
+groupImage.addEventListener(
+  "change",
+  async function(){
+
+    const file =
+      groupImage.files[0];
+
+    if(!file){
+      return;
+    }
+
+    try{
+
+      currentGroupImage =
+        await compressImage(file);
+
+      groupImagePreview.src =
+        currentGroupImage;
+
+      groupImagePreview.style.display =
+        "block";
+
+    }catch(error){
+
+      alert(
+        "画像を読み込めませんでした。"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   ファイル画像削除
+========================= */
+
+document
+  .getElementById("removeGroupImageButton")
+  .addEventListener(
+    "click",
+    function(){
+
+      currentGroupImage = "";
+
+      groupImage.value = "";
+
+      groupImagePreview.src = "";
+
+      groupImagePreview.style.display =
+        "none";
+
+    }
+  );
+
+
+/* =========================
+   ファイル編集保存
+========================= */
+
+groupForm.addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+    const oldName =
+      groupOldName.value.trim();
+
+    const newName =
+      groupName.value.trim();
+
+    if(!newName){
+
+      alert(
+        "グッズ名を入力してね！"
+      );
+
+      return;
+
+    }
+
+    /*
+      名前を変更した場合、
+      そのファイル内の交換も全部新しい名前へ変更
+    */
+
+    if(
+      oldName !== newName
+    ){
+
+      data =
+        data.map(
+          function(item){
+
+            if(item.itemType === oldName){
+
+              item.itemType =
+                newName;
+
+            }
+
+            return item;
+
+          }
+        );
+
+      if(categoryImages[oldName]){
+
+        categoryImages[newName] =
+          categoryImages[oldName];
+
+        delete categoryImages[oldName];
+
+      }
+
+      if(groups[oldName]){
+
+        groups[newName] =
+          groups[oldName];
+
+        delete groups[oldName];
+
+      }
+
+    }
+
+    groups[newName] = {
+
+      date:
+        groupDate.value,
+
+      image:
+        currentGroupImage || ""
+
+    };
+
+    if(currentGroupImage){
+
+      categoryImages[newName] =
+        currentGroupImage;
+
+    }else{
+
+      delete categoryImages[newName];
+
+    }
+
+    saveData();
+
+    saveImages();
+
+    saveGroups();
+
+    groupDialog.close();
+
+    show();
+
+  }
+);
+
+
+/* =========================
+   ファイル削除
+========================= */
+
+function deleteGroup(name){
+
+  const count =
+    data.filter(
+      function(item){
+
+        return item.itemType === name;
+
+      }
+    ).length;
+
+  const message =
+    count > 0
+      ? `「${name}」には${count}件の交換があります。\nファイルと中の交換をすべて削除しますか？`
+      : `「${name}」を削除しますか？`;
+
+  if(!confirm(message)){
+
+    return;
+
+  }
+
+  data =
+    data.filter(
+      function(item){
+
+        return item.itemType !== name;
+
+      }
+    );
+
+  delete groups[name];
+
+  delete categoryImages[name];
 
   saveData();
+
+  saveGroups();
+
+  saveImages();
 
   show();
 
@@ -1559,8 +1935,8 @@ function deleteItem(id){
 
 function setFilter(type){
 
-  currentFilter = type;
-
+  currentFilter =
+    type;
 
   document
     .querySelectorAll(".tab")
@@ -1574,7 +1950,6 @@ function setFilter(type){
       }
     );
 
-
   if(type === "all"){
 
     document
@@ -1582,7 +1957,6 @@ function setFilter(type){
       .classList.add("active");
 
   }
-
 
   if(type === "active"){
 
@@ -1592,7 +1966,6 @@ function setFilter(type){
 
   }
 
-
   if(type === "done"){
 
     document
@@ -1600,7 +1973,6 @@ function setFilter(type){
       .classList.add("active");
 
   }
-
 
   show();
 
@@ -1681,6 +2053,37 @@ document
 
 
 /* =========================
+   ステータスアイコン
+========================= */
+
+function statusIcon(status){
+
+  if(status === "約束済み"){
+    return "📝";
+  }
+
+  if(status === "梱包済み"){
+    return "📦";
+  }
+
+  if(status === "発送済み"){
+    return "📮";
+  }
+
+  if(status === "到着待ち"){
+    return "📬";
+  }
+
+  if(status === "完了"){
+    return "✅";
+  }
+
+  return "📝";
+
+}
+
+
+/* =========================
    表示
 ========================= */
 
@@ -1691,6 +2094,9 @@ function show(){
       .toLowerCase()
       .trim();
 
+  /*
+    まず交換をフィルター
+  */
 
   const filtered =
     data.filter(
@@ -1714,16 +2120,13 @@ function show(){
           .join(" ")
           .toLowerCase();
 
-
         const matchesSearch =
           searchText.includes(
             keyword
           );
 
-
         let matchesFilter =
           true;
-
 
         if(
           currentFilter === "active"
@@ -1734,7 +2137,6 @@ function show(){
 
         }
 
-
         if(
           currentFilter === "done"
         ){
@@ -1743,7 +2145,6 @@ function show(){
             item.status === "完了";
 
         }
-
 
         return (
           matchesSearch &&
@@ -1769,172 +2170,344 @@ function show(){
   }
 
 
-  listElement.innerHTML =
-    filtered
-      .map(
-        function(item){
+  /*
+    グッズ名ごとに自動グループ化
+  */
 
-          const categoryImage =
-            categoryImages[item.itemType] ||
+  const grouped = {};
+
+  filtered.forEach(
+    function(item){
+
+      if(!grouped[item.itemType]){
+
+        grouped[item.itemType] =
+          [];
+
+      }
+
+      grouped[item.itemType].push(
+        item
+      );
+
+    }
+  );
+
+
+  /*
+    グループの順番
+    ・既存データの最初の登録順
+  */
+
+  const groupNames =
+    Object.keys(grouped);
+
+
+  listElement.innerHTML =
+    groupNames
+      .map(
+        function(groupName){
+
+          const items =
+            grouped[groupName];
+
+          const group =
+            getGroup(groupName);
+
+          const groupImage =
+            group.image ||
+            categoryImages[groupName] ||
             "";
 
-
           const imageHtml =
-            categoryImage
+            groupImage
               ? `
                 <img
-                  class="card-image"
-                  src="${categoryImage}"
-                  data-photo="${encodeURIComponent(categoryImage)}"
+                  class="group-image"
+                  src="${groupImage}"
+                  data-photo="${encodeURIComponent(groupImage)}"
                 >
               `
-              : "";
+              : `
+                <div class="group-image"></div>
+              `;
 
 
-          const xidHtml =
-            item.xid
-              ? `
-                <div class="xid">
-                  <a
-                    href="https://x.com/${encodeURIComponent(
-                      item.xid.replace(/^@/,"")
-                    )}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    ${escapeHtml(item.xid)}
-                  </a>
-                </div>
-              `
-              : "";
+          /*
+            ステータス集計
+          */
+
+          const countPromise =
+            items.filter(
+              function(x){
+                return x.status === "約束済み";
+              }
+            ).length;
+
+          const countPacked =
+            items.filter(
+              function(x){
+                return x.status === "梱包済み";
+              }
+            ).length;
+
+          const countSent =
+            items.filter(
+              function(x){
+                return x.status === "発送済み";
+              }
+            ).length;
+
+          const countWaiting =
+            items.filter(
+              function(x){
+                return x.status === "到着待ち";
+              }
+            ).length;
+
+          const countDone =
+            items.filter(
+              function(x){
+                return x.status === "完了";
+              }
+            ).length;
 
 
-          const metaParts = [];
+          const cards =
+            items
+              .map(
+                function(item){
+
+                  const xidHtml =
+                    item.xid
+                      ? `
+                        <div class="xid">
+                          <a
+                            href="https://x.com/${encodeURIComponent(
+                              item.xid.replace(/^@/,"")
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            ${escapeHtml(item.xid)}
+                          </a>
+                        </div>
+                      `
+                      : "";
 
 
-          if(item.method){
+                  const metaParts = [];
 
-            metaParts.push(
-              "📦 " +
-              escapeHtml(
-                item.method
+
+                  if(item.method){
+
+                    metaParts.push(
+                      "📦 " +
+                      escapeHtml(
+                        item.method
+                      )
+                    );
+
+                  }
+
+
+                  if(item.date){
+
+                    metaParts.push(
+                      "📅 " +
+                      escapeHtml(
+                        item.date
+                      )
+                    );
+
+                  }
+
+
+                  let metaHtml =
+                    metaParts.join("　");
+
+
+                  if(item.event){
+
+                    metaHtml +=
+                      "<br>📍 " +
+                      escapeHtml(
+                        item.event
+                      );
+
+                  }
+
+
+                  if(item.memo){
+
+                    metaHtml +=
+                      "<br>📝 " +
+                      escapeHtml(
+                        item.memo
+                      );
+
+                  }
+
+
+                  return `
+
+                    <div class="card">
+
+                      <div class="top">
+
+                        <div>
+
+                          <div class="name">
+                            ${escapeHtml(
+                              item.name
+                            )}
+                          </div>
+
+                          ${xidHtml}
+
+                        </div>
+
+                        <div class="badge">
+                          ${statusIcon(item.status)}
+                          ${escapeHtml(item.status)}
+                        </div>
+
+                      </div>
+
+
+                      <div class="characters">
+                        ${escapeHtml(
+                          item.characters
+                        )}
+                      </div>
+
+
+                      ${
+                        metaHtml
+                          ? `
+                            <div class="meta">
+                              ${metaHtml}
+                            </div>
+                          `
+                          : ""
+                      }
+
+
+                      <div class="actions">
+
+                        <button
+                          type="button"
+                          data-edit="${escapeHtml(item.id)}"
+                        >
+                          編集
+                        </button>
+
+                        <button
+                          type="button"
+                          data-delete="${escapeHtml(item.id)}"
+                        >
+                          削除
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  `;
+
+                }
               )
-            );
-
-          }
-
-
-          if(item.date){
-
-            metaParts.push(
-              "📅 " +
-              escapeHtml(
-                item.date
-              )
-            );
-
-          }
-
-
-          let metaHtml =
-            metaParts.join("　");
-
-
-          if(item.event){
-
-            metaHtml +=
-              "<br>📍 " +
-              escapeHtml(
-                item.event
-              );
-
-          }
-
-
-          if(item.memo){
-
-            metaHtml +=
-              "<br>📝 " +
-              escapeHtml(
-                item.memo
-              );
-
-          }
+              .join("");
 
 
           return `
 
-            <div class="card">
+            <section class="group">
 
-              ${imageHtml}
+              <div class="group-header">
 
-              <div class="top">
+                <div class="group-title-row">
 
-                <div>
+                  ${imageHtml}
 
-                  <div class="name">
-                    ${escapeHtml(
-                      item.name
-                    )}
+                  <div class="group-info">
+
+                    <div class="group-name">
+                      ${escapeHtml(groupName)}
+                    </div>
+
+                    ${
+                      group.date
+                        ? `
+                          <div class="group-date">
+                            📅 発売日 ${escapeHtml(group.date)}
+                          </div>
+                        `
+                        : ""
+                    }
+
+                    <div class="group-count">
+                      全 ${items.length}件
+                    </div>
+
                   </div>
 
-                  ${xidHtml}
+                </div>
+
+
+                <div class="group-stats">
+
+                  <div class="stat">
+                    📝 ${countPromise}
+                  </div>
+
+                  <div class="stat">
+                    📦 ${countPacked}
+                  </div>
+
+                  <div class="stat">
+                    📮 ${countSent}
+                  </div>
+
+                  <div class="stat">
+                    📬 ${countWaiting}
+                  </div>
+
+                  <div class="stat">
+                    ✅ ${countDone}
+                  </div>
 
                 </div>
 
-                <div class="badge">
-                  ${escapeHtml(
-                    item.status
-                  )}
+
+                <div class="group-actions">
+
+                  <button
+                    type="button"
+                    data-group-edit="${escapeHtml(groupName)}"
+                  >
+                    ⚙ グッズ情報
+                  </button>
+
+                  <button
+                    type="button"
+                    data-group-delete="${escapeHtml(groupName)}"
+                  >
+                    ファイル削除
+                  </button>
+
                 </div>
 
               </div>
 
 
-              <div class="item-type">
-                ${escapeHtml(
-                  item.itemType
-                )}
-              </div>
+              <div class="exchange-grid">
 
-
-              <div class="characters">
-                ${escapeHtml(
-                  item.characters
-                )}
-              </div>
-
-
-              ${
-                metaHtml
-                  ? `
-                    <div class="meta">
-                      ${metaHtml}
-                    </div>
-                  `
-                  : ""
-              }
-
-
-              <div class="actions">
-
-                <button
-                  type="button"
-                  data-edit="${escapeHtml(item.id)}"
-                >
-                  編集
-                </button>
-
-                <button
-                  type="button"
-                  data-delete="${escapeHtml(item.id)}"
-                >
-                  削除
-                </button>
+                ${cards}
 
               </div>
 
-            </div>
+            </section>
 
           `;
 
@@ -1943,7 +2516,9 @@ function show(){
       .join("");
 
 
-  /* 編集 */
+  /* =========================
+     交換編集
+  ========================= */
 
   listElement
     .querySelectorAll("[data-edit]")
@@ -1965,7 +2540,9 @@ function show(){
     );
 
 
-  /* 削除 */
+  /* =========================
+     交換削除
+  ========================= */
 
   listElement
     .querySelectorAll("[data-delete]")
@@ -1987,7 +2564,57 @@ function show(){
     );
 
 
-  /* 画像 */
+  /* =========================
+     ファイル編集
+  ========================= */
+
+  listElement
+    .querySelectorAll("[data-group-edit]")
+    .forEach(
+      function(button){
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            openGroupEditor(
+              button.dataset.groupEdit
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  /* =========================
+     ファイル削除
+  ========================= */
+
+  listElement
+    .querySelectorAll("[data-group-delete]")
+    .forEach(
+      function(button){
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            deleteGroup(
+              button.dataset.groupDelete
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  /* =========================
+     画像
+  ========================= */
 
   listElement
     .querySelectorAll("[data-photo]")
@@ -2047,6 +2674,23 @@ function escapeHtml(text){
 
 
 /* =========================
+   グループダイアログ
+   キャンセル
+========================= */
+
+document
+  .getElementById("cancelGroupButton")
+  .addEventListener(
+    "click",
+    function(){
+
+      groupDialog.close();
+
+    }
+  );
+
+
+/* =========================
    初期表示
 ========================= */
 
@@ -2056,5 +2700,3 @@ show();
 
 </body>
 </html>
- 
- 
